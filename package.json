@@ -4,7 +4,8 @@
     "description": "A simple Hello World app in Node.js",
     "main": "app.js",
     "scripts": {
-      "start": "node app.js"
+      "start": "node app.js",
+      "build": "echo 'Building project..'"
     },
     "author": "",
     "license": "ISC"
