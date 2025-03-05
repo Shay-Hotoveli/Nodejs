@@ -33,6 +33,7 @@ pipeline {
             steps {
                 cleanWs()
                 echo 'Workspace cleaned!'
+                sh 'ls -al'
             }
         }
     }
