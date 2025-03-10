@@ -1,0 +1,31 @@
+name: Node.js CI Workflow
+
+on: 
+  push:
+    branches:
+      - main  # You can modify this to your branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+
+    steps:
+      - name: Checkout code from repo
+        uses: actions/checkout@v4
+        with:
+          repository: 'berezovsky13/nodejs'  # Clone the repo
+          ref: 'main'  # Or specify the branch you want to use
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Specify the Node.js version you want to use
+
+      - name: Install dependencies with npm
+        run: npm install  # Run npm install to install dependencies
+
+      - name: Run build
+        run: npm run build  # This assumes there's a build script in package.json
+
+      - name: Run tests
+        run: npm test  # If you have tests, run them here
