@@ -3,7 +3,7 @@ name: Node.js CI Workflow
 on: 
   push:
     branches:
-      - main  # You can modify this to your branch name
+      - master  # You can modify this to your branch name
 
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code from repo
         uses: actions/checkout@v4
         with:
-          repository: 'berezovsky13/nodejs'  # Clone the repo
+          repository: 'Shay-Hotoveli/nodejs'  # Clone the repo
           ref: 'main'  # Or specify the branch you want to use
 
       - name: Set up Node.js
