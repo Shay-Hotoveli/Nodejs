@@ -3,29 +3,30 @@ name: Node.js CI Workflow
 on: 
   push:
     branches:
-      - master  # You can modify this to your branch name
+      - master  # Ensure this branch exists in your repo
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    runs-on: ubuntu-latest  
 
     steps:
       - name: Checkout code from repo
         uses: actions/checkout@v4
         with:
-          repository: 'Shay-Hotoveli/nodejs'  # Clone the repo
-          ref: 'main'  # Or specify the branch you want to use
+          repository: 'Shay-Hotoveli/Nodejs'  # Updated repo name
+          ref: 'master'  # Change this if your branch is different
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Specify the Node.js version you want to use
+          node-version: '16'  
 
       - name: Install dependencies with npm
-        run: npm install  # Run npm install to install dependencies
+        run: npm install  
 
       - name: Run build
-        run: npm run build  # This assumes there's a build script in package.json
+        run: npm run build  
 
       - name: Run tests
-        run: npm test  # If you have tests, run them here
+        run: npm test  
+
