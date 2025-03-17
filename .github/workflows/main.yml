@@ -59,12 +59,26 @@
 #         run: npm run test || echo 'No tests configured yet!'
 
 name: Check Docker Version
+
 on: push
 jobs:
+
   check-docker:
     runs-on: ubuntu-latest
     steps:
       - name: Show Docker Version
         run: docker --version
+
+  run-docker-container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Ensures script is executable
+        run: chmod +x script.sh
+
+      - name: Running docker container with myvolume volume
+        run: ./script.sh 
 
 
