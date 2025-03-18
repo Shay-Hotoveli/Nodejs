@@ -1,24 +1,36 @@
 name: Check Docker Version
 
-on: push
+on: 
+  push:
+    branches:
+      - master
+
 jobs:
-
-  check-docker:
+  build and deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Show Docker Version
-        run: docker --version
 
-  run-docker-container:
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Ensures script is executable
-        run: chmod +x script.sh
+      - name: Login to DockerHub
+        run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-      - name: Running docker container with myvolume volume
-        run: ./script.sh 
+      - name: Build Docker Image
+        run: docker build -t shayhotoveli/nodejs-app:latest .
+
+      - name: Tag Docker Image
+        run: docker tag shayhotoveli/nodejs-app:latest shayhotoveli/nodejs-app:${{ github.run_number }}
+
+      - name: Push Docker Image
+        run: |
+          docker push shayhotoveli/nodejs-app:latest
+          docker push shayhotoveli/nodejs-app:${{ github.run_number }}
+
+      - name: Run Docker Container
+        run: docker run -d --name nodejs-app -p 3000:3000 shayhotoveli/nodejs-app:latest
+
+        
+
 
 
