@@ -28,7 +28,7 @@ jobs:
           docker push shayhot/nodejs-app:${{ github.run_number }}
 
       - name: Run Docker Container
-        run: docker run -d --name nodejs-app -p 3000:3000 shayhotoveli/nodejs-app:latest
+        run: docker run -d --name nodejs-app -p 3000:3000 shayhot/nodejs-app:latest
 
         
 
