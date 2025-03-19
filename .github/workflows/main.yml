@@ -20,9 +20,7 @@ jobs:
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-app:latest .
 
       - name: Push Docker Image
-        run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-app:latest
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-app:${{ github.run_number }}
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-app:latest
 
       - name: Run Docker Container
         run: docker run -d --name nodejs-app -p 3000:3000 ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-app:latest
