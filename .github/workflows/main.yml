@@ -17,18 +17,18 @@ jobs:
         run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t shayhot/nodejs-app:latest .
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-app:latest .
 
       - name: Tag Docker Image
-        run: docker tag shayhot/nodejs-app:latest shayhot/nodejs-app:${{ github.run_number }}
+        run: docker tag ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-app:latest ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-app:${{ github.run_number }}
 
       - name: Push Docker Image
         run: |
-          docker push shayhot/nodejs-app:latest
-          docker push shayhot/nodejs-app:${{ github.run_number }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-app:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-app:${{ github.run_number }}
 
       - name: Run Docker Container
-        run: docker run -d --name nodejs-app -p 3000:3000 shayhot/nodejs-app:latest
+        run: docker run -d --name nodejs-app -p 3000:3000 ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-app:latest
 
         
 
